@@ -57,6 +57,9 @@ group :development, :test do
   # rspec-rails is a testing framework for Rails 5+.
   gem "rspec-rails"
 
+  # provides RSpec- and Minitest-compatible one-liners to test common Rails functionality that, if written by hand,
+  # would be much longer, more complex, and error-prone.
+  gem "shoulda-matchers"
 end
 
 group :development do
