@@ -7,5 +7,8 @@ FactoryBot.define do
     sequence(:content) { |n| "<p>Page content goes here #{n}</p>" }
     created_at { Time.zone.now }
     published { false }
+    trait :published do
+      published { true }
+    end
   end
 end
