@@ -4,7 +4,7 @@ class Page < ApplicationRecord
   validates :content, presence: true
   before_validation :make_slug
   scope :published, -> { where(published: true) }
-
+  scope :ordered, -> { order(created_at: :desc) }
 
   private
 
