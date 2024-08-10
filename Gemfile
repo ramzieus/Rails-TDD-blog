@@ -53,13 +53,21 @@ gem 'factory_bot_rails'
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
   gem "debug", platforms: %i[ mri windows ]
+end
 
+group :test do
   # rspec-rails is a testing framework for Rails 5+.
   gem "rspec-rails"
 
   # provides RSpec- and Minitest-compatible one-liners to test common Rails functionality that, if written by hand,
   # would be much longer, more complex, and error-prone.
   gem "shoulda-matchers"
+
+  # test web applications by simulating how a real user would interact with your app
+  gem 'capybara'
+
+  # Run Selenium tests more easily with automatic installation and updates for all supported webdrivers.
+  gem 'webdrivers'
 end
 
 group :development do
