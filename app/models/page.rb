@@ -5,6 +5,15 @@ class Page < ApplicationRecord
   before_validation :make_slug
   scope :published, -> { where(published: true) }
   scope :ordered, -> { order(created_at: :desc) }
+  scope :by_term, ->(term) do
+    term.gsub!(/[^-\w ]/, '')
+    terms = term.include?(' ') ? term.split : [term]
+    pages = Page
+    terms.each do |t|
+      pages = pages.where('content ILIKE ?', "%#{t}%")
+    end
+    pages
+  end
 
   private
 

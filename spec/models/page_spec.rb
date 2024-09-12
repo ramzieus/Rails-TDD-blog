@@ -29,6 +29,7 @@ RSpec.describe Page, type: :model do
         expect(Page.published).to eq([page1])
       end
     end
+
     describe '.ordered' do
       let(:page1) { create(:page, created_at: 2.days.ago) }
       let(:page2) { create(:page, created_at: 1.day.ago) }
@@ -37,6 +38,26 @@ RSpec.describe Page, type: :model do
       end
       it 'returns ordered pages' do
         expect(Page.ordered).to eq([page2, page1])
+      end
+    end
+
+    describe '.by_term' do
+      let(:page1) { create(:page, content: 'foo') }
+      let(:page2) { create(:page, content: 'foo bar') }
+      let(:page3) { create(:page, content: 'foo bar baz') }
+
+      before do
+        [page1, page2]
+      end
+
+      it 'returns pages for the given term' do
+        expected = [page1, page2, page3]
+        expect(Page.by_term('foo')).to match_array(expected)
+      end
+
+      it 'returns pages for multiple terms' do
+        expected = [page3]
+        expect(Page.by_term('foo baz')).to match_array(expected)
       end
     end
   end
